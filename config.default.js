@@ -2,7 +2,8 @@ export default {
   server: {
     host: '0.0.0.0',
     port: 3000,
-    password: 'youshallnotpass',
+    password:
+      process.env.NODELINK_SERVER_PASSWORD || 'CHANGE_ME_NODELINK_PASSWORD',
     useBunServer: false // set to true to use Bun.serve websocket (experimental)
   },
   cluster: {

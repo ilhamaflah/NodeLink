@@ -354,6 +354,24 @@ class NodelinkServer extends EventEmitter {
       (value) => typeof value === 'string'
     )
 
+    const insecureDefaults = new Set([
+      '',
+      'youshallnotpass',
+      'change_me_nodelink_password',
+      'changeme',
+      'password',
+      '12345678'
+    ])
+    validateProperty(
+      this.options.server.password,
+      'server.password',
+      'string with at least 12 characters and not a known default value',
+      (value) =>
+        typeof value === 'string' &&
+        value.length >= 12 &&
+        !insecureDefaults.has(value.toLowerCase())
+    )
+
     validateProperty(
       this.options.playerUpdateInterval,
       'playerUpdateInterval',
